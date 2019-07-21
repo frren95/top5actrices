@@ -1,0 +1,5 @@
+# Ignore files
+js/jquery.js
+
+# Ignore assets folders
+img/
