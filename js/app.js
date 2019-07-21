@@ -13,19 +13,24 @@ $(document).ready(function(){
 
       bindEvents = function(){
         $mainMenuItems.children(".images").click(function(){
-          var newIndex = $(this).parent().index(),
-              $item = $mainMenuItems.eq(newIndex);
+          var newIndex = $(this).parent().index();
 
-          if(openedIndex === newIndex){
-            animateItem($item,false,250);
-            openedIndex = -1;
-          } else {
-            if(validIndex(newIndex)){
-              animateItem($mainMenuItems.eq(openedIndex),false,250);
-              openedIndex = newIndex;
-              animateItem($item,true,250);
-            } 
+          checkAndAnimateItem(newIndex);
+
+        });
+
+        $(".button").hover(
+          function(){
+            $(this).addClass('hovered');
+          },
+          function(){
+            $(this).removeClass('hovered');
           }
+        );
+
+        $(".button").click(function(){
+          var newIndex = $(this).index();
+          checkAndAnimateItem(newIndex);
         });
       },
 
@@ -40,7 +45,20 @@ $(document).ready(function(){
 
         $colorImage.animate(colorImageParam,speed);
         $item.animate(itemParam,speed);
-      };
+      },
+
+      checkAndAnimateItem = function(indexToChekAndAnimate){
+        if(openedIndex === indexToChekAndAnimate){
+          animateItem($mainMenuItems.eq(indexToChekAndAnimate),false,250);
+          openedIndex = -1;
+        } else {
+          if(validIndex(indexToChekAndAnimate)){
+            animateItem($mainMenuItems.eq(openedIndex),false,250);
+            openedIndex = indexToChekAndAnimate;
+            animateItem($mainMenuItems.eq(openedIndex),true,250);
+          } 
+        }
+      }
 
       init();
 
