@@ -1,9 +1,17 @@
 $(document).ready(function(){
   var $mainMenuItems = $('#main-menu ul').children('li'),
       totalMainMenuItems = $mainMenuItems.length,
-      openedIndex = -1,
-      
+      openedIndex = 2,
+
       init = function(){
+        bindEvents();
+
+        if(validIndex(openedIndex)){
+          animateItem($mainMenuItems.eq(openedIndex),true,700);
+        }
+      },
+
+      bindEvents = function(){
         $mainMenuItems.children(".images").click(function(){
           var newIndex = $(this).parent().index(),
               $item = $mainMenuItems.eq(newIndex);
